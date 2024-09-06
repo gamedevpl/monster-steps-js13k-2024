@@ -176,7 +176,7 @@ export const doGameUpdate = (direction: Direction, gameState: GameState, levelCo
     // Update active bonuses
     newGameState.activeBonuses = newGameState.activeBonuses
       .map((bonus) => ({ ...bonus, duration: bonus.duration ? bonus.duration - 1 : undefined }))
-      .filter((bonus) => !bonus.duration || bonus.duration > 0);
+      .filter((bonus) => bonus.duration === undefined || bonus.duration > 0);
 
     // Handle builder bonus
     if (isActiveBonus(newGameState, BonusType.Builder)) {
