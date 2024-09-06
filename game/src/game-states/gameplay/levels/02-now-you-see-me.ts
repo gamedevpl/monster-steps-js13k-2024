@@ -11,7 +11,7 @@ import {
 
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
-  const config = generateBaseConfig(8, 2, 'Now You See Me', 'Use the invisibility cap to sneak past the monsters!');
+  const config = generateBaseConfig(8, 2, 'Now You See Me');
 
   state.player = createPlayer(0, 4);
   state.goal = createPosition(7, 4);
@@ -19,5 +19,5 @@ export const generateLevel = (): [GameState, LevelConfig, string] => {
   state.bonuses = [createBonus(2, 4, BonusType.CapOfInvisibility)];
   state.obstacles = [createObstacle(1, 3), createObstacle(1, 5), createObstacle(6, 3), createObstacle(6, 5)];
 
-  return [state, config, config.levelStory];
+  return [state, config, 'Use the invisibility cap to sneak past the monsters!'];
 };

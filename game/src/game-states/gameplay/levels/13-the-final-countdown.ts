@@ -70,13 +70,7 @@ function createPredefinedBonuses(): { position: Position; type: BonusType }[] {
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
   delete state.goal;
-  const config = generateBaseConfig(
-    GRID_SIZE,
-    13,
-    'The Chaos Nexus',
-    'Survive the chaos and uncover the true path to victory!',
-    updateDynamicLevel,
-  );
+  const config = generateBaseConfig(GRID_SIZE, 13, 'The Chaos Nexus', updateDynamicLevel);
 
   state.player = createPlayer(0, 0);
 

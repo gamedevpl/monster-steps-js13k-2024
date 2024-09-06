@@ -72,7 +72,6 @@ const generateBaseConfig = (
   gridSize: number,
   levelNumber: number,
   levelName: string,
-  levelStory: string,
   levelUpdater = simpleLevelUpdater,
 ): LevelConfig => ({
   gridSize,
@@ -83,7 +82,6 @@ const generateBaseConfig = (
   initialBonusCount: 0,
   levelNumber,
   levelName,
-  levelStory,
   levelUpdater,
 });
 

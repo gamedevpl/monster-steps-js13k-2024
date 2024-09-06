@@ -11,7 +11,7 @@ import {
 
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
-  const config = generateBaseConfig(10, 6, "Minesweeper's Revenge", 'Plant a surprise for your pursuers!');
+  const config = generateBaseConfig(10, 6, "Minesweeper's Revenge");
 
   state.player = createPlayer(0, 5);
   state.goal = createPosition(9, 5);
@@ -25,5 +25,5 @@ export const generateLevel = (): [GameState, LevelConfig, string] => {
     }
   }
 
-  return [state, config, config.levelStory];
+  return [state, config, 'Plant a surprise for your pursuers!'];
 };

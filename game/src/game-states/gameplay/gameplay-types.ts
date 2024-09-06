@@ -108,7 +108,6 @@ export interface LevelConfig {
   initialBonusCount: number;
   levelNumber: number;
   levelName: string;
-  levelStory: string;
   levelUpdater: (state: GameState, levelConfig: LevelConfig) => void;
 }
 

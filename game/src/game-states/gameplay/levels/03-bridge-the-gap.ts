@@ -11,7 +11,7 @@ import {
 
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
-  const config = generateBaseConfig(9, 3, 'Bridge the Gap', 'Build your way to victory!');
+  const config = generateBaseConfig(9, 3, 'Bridge the Gap');
 
   state.player = createPlayer(0, 4);
   state.goal = createPosition(8, 4);
@@ -26,5 +26,5 @@ export const generateLevel = (): [GameState, LevelConfig, string] => {
     createObstacle(5, 5),
   ];
 
-  return [state, config, config.levelStory];
+  return [state, config, 'Build your way to victory!'];
 };

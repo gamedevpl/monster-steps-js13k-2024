@@ -32,12 +32,7 @@ const MAZE_LAYOUT = [
 
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
-  const config = generateBaseConfig(
-    GRID_SIZE,
-    12,
-    'Maze of Challenges',
-    'Navigate through a treacherous maze using your wit and special abilities!',
-  );
+  const config = generateBaseConfig(GRID_SIZE, 12, 'Maze of Challenges');
 
   // Place obstacles based on the maze layout
   for (let y = 0; y < GRID_SIZE; y++) {

@@ -11,7 +11,7 @@ import {
 
 export const generateLevel = (): [GameState, LevelConfig, string] => {
   const state = generateBaseState();
-  const config = generateBaseConfig(10, 5, 'Tick Tock Boom', 'Time your bomb perfectly to clear the way!');
+  const config = generateBaseConfig(10, 5, 'Tick Tock Boom');
 
   state.player = createPlayer(0, 5);
   state.goal = createPosition(9, 5);
@@ -42,5 +42,5 @@ export const generateLevel = (): [GameState, LevelConfig, string] => {
 
   config.monsterSpawnSectors = [createPosition(1, 9)];
 
-  return [state, config, config.levelStory];
+  return [state, config, 'Time your bomb perfectly to clear the way!'];
 };

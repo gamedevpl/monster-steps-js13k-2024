@@ -44,7 +44,6 @@ export function createGamePreview(): GamePreviewContainer {
         initialBonusCount: 0,
         levelNumber: 1,
         levelName: 'Preview',
-        levelStory: 'Preview',
         levelUpdater: () => {},
       });
 
