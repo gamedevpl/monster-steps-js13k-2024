@@ -25,7 +25,7 @@ export function renderIntro(onStart: () => void, onInstructions: () => void): In
         </div>
       </div>
       <p class="author-name">
-        Created by <a href="https://x.com/gtanczyk">Grzegorz Tańczyk</a> | <a href="https://github.com/gamedevpl/www.gamedev.pl/tree/js13k2024-monster-steps-version/js13k2024">Source code (GitHub)</a>
+        Created by <a href="https://x.com/gtanczyk">Grzegorz Tańczyk</a> | <a href="https://github.com/gamedevpl/monster-steps-js13k-2024">Source code (GitHub)</a>
       </p>
     </div>
   `;
