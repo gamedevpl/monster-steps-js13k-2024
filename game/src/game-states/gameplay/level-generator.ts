@@ -63,6 +63,7 @@ const generateBaseState = (): GameState => ({
   gameEndingState: 'none',
   tsunamiLevel: 0,
   blasterShots: [],
+  spawnedMonsterCount: 0,
 });
 
 const CELL_SIZE = 40;

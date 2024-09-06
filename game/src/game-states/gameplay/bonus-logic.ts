@@ -70,7 +70,7 @@ export const spawnDynamicBonus = (gameState: GameState, levelConfig: LevelConfig
     isPositionOccupied(position, gameState.monsters) ||
     isPositionOccupied(position, gameState.bonuses) ||
     isPositionEqual(position, gameState.player.position) ||
-    isPositionEqual(position, gameState.goal) ||
+    (gameState.goal && isPositionEqual(position, gameState.goal)) ||
     manhattanDistance(position, gameState.player.position) < 3
   );
 

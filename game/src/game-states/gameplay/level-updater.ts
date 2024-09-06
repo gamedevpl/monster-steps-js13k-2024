@@ -9,6 +9,7 @@ export function simpleLevelUpdater(gameState: GameState, levelConfig: LevelConfi
       gameState.monsters.push(newMonster);
       gameState.monsterSpawnSteps = 0;
       playEffect(SoundEffect.MonsterSpawn);
+      gameState.spawnedMonsterCount++;
     }
   }
 }

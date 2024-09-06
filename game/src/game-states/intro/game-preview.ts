@@ -130,5 +130,6 @@ function createPreviewGameState(): GameState {
     gameEndingState: 'none',
     tsunamiLevel: 0,
     blasterShots: [],
+    spawnedMonsterCount: 0,
   };
 }

@@ -1,10 +1,10 @@
-import { Position, BonusType, getBonusDescription } from '../gameplay-types';
+import { Position, getBonusDescription, ActiveBonus } from '../gameplay-types';
 import { toIsometric } from './isometric-utils';
 
 export const drawTooltip = (
   ctx: CanvasRenderingContext2D,
   playerPosition: Position,
-  activeBonus: { type: BonusType; duration: number },
+  activeBonus: ActiveBonus,
   cellSize: number,
 ) => {
   ctx.save();
@@ -12,8 +12,12 @@ export const drawTooltip = (
   // Measure description text
   ctx.font = 'bold 16px Arial';
 
-  const { x, y } = toIsometric(playerPosition.x, playerPosition.y);
-  const tooltipWidth = ctx.measureText(getBonusDescription(activeBonus.type)).width + 20;
+  const text = activeBonus.tooltip ?? getBonusDescription(activeBonus.type);
+
+  const { x, y } = activeBonus.tooltipPosition
+    ? toIsometric(activeBonus.tooltipPosition.x, activeBonus.tooltipPosition.y)
+    : toIsometric(playerPosition.x, playerPosition.y);
+  const tooltipWidth = ctx.measureText(text).width + 20;
   const tooltipHeight = 90; // Increased height to accommodate icon
   const arrowSize = 15;
   const cornerRadius = 10;
@@ -53,10 +57,12 @@ export const drawTooltip = (
   // Draw the tooltip text
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
-  ctx.fillText(getBonusDescription(activeBonus.type), tooltipX + tooltipWidth / 2, tooltipY + 30);
+  ctx.fillText(text, tooltipX + tooltipWidth / 2, tooltipY + 30);
 
-  ctx.font = '14px Arial';
-  ctx.fillText(`${activeBonus.duration} steps left`, tooltipX + tooltipWidth / 2, tooltipY + 55);
+  if (activeBonus.duration) {
+    ctx.font = '14px Arial';
+    ctx.fillText(`${activeBonus.duration} steps left`, tooltipX + tooltipWidth / 2, tooltipY + 55);
+  }
 
   ctx.restore();
 };

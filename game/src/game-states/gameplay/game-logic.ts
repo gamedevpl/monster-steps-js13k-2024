@@ -78,8 +78,8 @@ export const doGameUpdate = (direction: Direction, gameState: GameState, levelCo
       handleTsunamiEffect(newGameState);
     }
 
-    // Check for goal
-    if (isPositionEqual(newPosition, newGameState.goal)) {
+    // Check for goal (only if it's revealed in level 13)
+    if (newGameState.goal && isPositionEqual(newPosition, newGameState.goal)) {
       newGameState.gameEndingState = 'levelComplete';
       startLevelCompleteAnimation(newGameState);
       newGameState.score += calculateLevelScore(newGameState);
@@ -175,8 +175,8 @@ export const doGameUpdate = (direction: Direction, gameState: GameState, levelCo
 
     // Update active bonuses
     newGameState.activeBonuses = newGameState.activeBonuses
-      .map((bonus) => ({ ...bonus, duration: bonus.duration - 1 }))
-      .filter((bonus) => bonus.duration > 0);
+      .map((bonus) => ({ ...bonus, duration: bonus.duration ? bonus.duration - 1 : undefined }))
+      .filter((bonus) => !bonus.duration || bonus.duration > 0);
 
     // Handle builder bonus
     if (isActiveBonus(newGameState, BonusType.Builder)) {

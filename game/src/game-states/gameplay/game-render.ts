@@ -69,24 +69,32 @@ export const drawGameState = (
 
   // Prepare all game objects for sorting
   const allObjects = [
-    ...tsunamiWaves.map((obj) => ({ position: obj.grid, type: 'wave', obj }) as const),
-    ...gameState.obstacles.map((obj) => ({ position: obj.position, type: 'obstacle', obj }) as const),
-    ...gameState.bonuses.map((obj) => ({ position: obj.position, type: 'bonus', obj }) as const),
-    ...gameState.landMines.map((obj) => ({ position: obj, type: 'landMine' }) as const),
-    ...gameState.timeBombs.map((obj) => ({ position: obj.position, type: 'timeBomb', obj }) as const),
-    ...gameState.monsters.map((obj) => ({ position: obj.position, type: 'monster', obj }) as const),
+    ...tsunamiWaves.map((obj) => ({ position: obj.grid, type: 'wave', obj } as const)),
+    ...gameState.obstacles.map((obj) => ({ position: obj.position, type: 'obstacle', obj } as const)),
+    ...gameState.bonuses.map((obj) => ({ position: obj.position, type: 'bonus', obj } as const)),
+    ...gameState.landMines.map((obj) => ({ position: obj, type: 'landMine' } as const)),
+    ...gameState.timeBombs.map((obj) => ({ position: obj.position, type: 'timeBomb', obj } as const)),
+    ...gameState.monsters.map((obj) => ({ position: obj.position, type: 'monster', obj } as const)),
     { position: gameState.player.position, type: 'player', obj: gameState.player } as const,
-    { position: gameState.goal, type: 'goal' } as const,
-    ...gameState.explosions.map((obj) => ({ position: obj.position, type: 'explosion', obj }) as const),
+    { position: gameState.goal!, type: 'goal' } as const,
+    ...gameState.explosions.map((obj) => ({ position: obj.position, type: 'explosion', obj } as const)),
     ...gameState.blasterShots.map(
       (obj) =>
         ({
           position: interpolatePosition(obj.endPosition, obj.startPosition, obj.shotTimestamp, obj.duration),
           type: 'blasterShot',
           obj,
-        }) as const,
+        } as const),
     ),
   ];
+
+  // Add goal to allObjects only if it exists (for level 13)
+  if (!gameState.goal) {
+    allObjects.splice(
+      allObjects.findIndex((obj) => obj.type === 'goal'),
+      1,
+    );
+  }
 
   // Sort all objects using calculateDrawingOrder
   const sortedObjects = calculateDrawingOrder(allObjects);
@@ -126,7 +134,10 @@ export const drawGameState = (
         );
         break;
       case 'goal':
-        drawGoal(ctx, position, cellSize);
+        // Only draw the goal if it exists (for level 13)
+        if (gameState.goal) {
+          drawGoal(ctx, position, cellSize);
+        }
         break;
       case 'explosion':
         drawExplosions(ctx, [sortedObject.obj]);
@@ -137,7 +148,9 @@ export const drawGameState = (
     }
   }
   // Draw tooltip if there's an active bonus
-  const tooltipBonus = gameState.activeBonuses.sort((a, b) => b.duration - a.duration)[0];
+  const tooltipBonus = gameState.activeBonuses.sort((a, b) =>
+    b.duration && a.duration ? b.duration - a.duration : 0,
+  )[0];
 
   if (tooltipBonus) {
     drawTooltip(ctx, gameState.player.position, tooltipBonus, cellSize);

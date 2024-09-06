@@ -15,6 +15,7 @@ export const moveMonsters = (
     let nextPosition: Position;
     const distanceToPlayer = calculateDistanceInSteps(monster.position, playerPosition, gridSize, obstacles);
 
+    // For level 13, always move towards the player
     if (isPlayerInvisible || distanceToPlayer > 13) {
       // If the player is invisible or too far, move towards spawn point
       nextPosition =

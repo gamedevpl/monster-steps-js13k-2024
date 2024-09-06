@@ -27,6 +27,7 @@ export enum BonusType {
   Slide,
   Sokoban,
   Blaster,
+  Hint,
 }
 
 export interface Bonus {
@@ -54,7 +55,7 @@ type GameEndingState = 'none' | 'gameOver' | 'levelComplete';
 
 export interface GameState {
   player: Player;
-  goal: Position;
+  goal?: Position;
   obstacles: Obstacle[];
   monsters: Monster[];
   steps: number;
@@ -69,6 +70,7 @@ export interface GameState {
   tsunamiLevel: number;
   tsunamiTeardownTimestamp?: number;
   blasterShots: BlasterShot[];
+  spawnedMonsterCount: number;
 }
 
 export type Explosion = {
@@ -85,7 +87,9 @@ type TimeBomb = {
 
 export type ActiveBonus = {
   type: BonusType;
-  duration: number;
+  duration?: number;
+  tooltip?: string;
+  tooltipPosition?: Position;
 };
 
 export enum Direction {
@@ -152,6 +156,8 @@ export function getBonusDescription(bonusType: BonusType): string {
       return 'Push it real good!';
     case BonusType.Blaster:
       return 'Pew pew pew!';
+    case BonusType.Hint:
+      return '';
     default:
       return 'Mystery power activated!';
   }

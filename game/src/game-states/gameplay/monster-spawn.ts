@@ -45,7 +45,7 @@ const isValidSpawnPosition = (position: Position, gameState: GameState, gridSize
     isPositionOccupied(position, gameState.obstacles) ||
     isPositionOccupied(position, gameState.monsters) ||
     isPositionOccupied(position, gameState.bonuses) ||
-    isPositionEqual(position, gameState.goal)
+    (gameState.goal && isPositionEqual(position, gameState.goal))
   ) {
     return false;
   }
